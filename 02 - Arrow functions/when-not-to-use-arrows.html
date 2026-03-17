@@ -44,13 +44,15 @@
   };
 
   // When you need arguments object
-  const orderChildren = function() {
+  const orderChildren = (...arguments) => { // you can still use an arrow function if you use a rest parameter
     const children = Array.from(arguments);
     return children.map((child, i) => {
       return `${child} was child #${i + 1}`;
     })
     console.log(arguments);
   }
+  
+
 
 
 </script>
