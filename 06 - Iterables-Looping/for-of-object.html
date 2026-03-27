@@ -1,24 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Iterables & Looping</title>
 </head>
+
 <body>
 
-<script>
-  const apple = {
-    color: 'Red',
-    size: 'Medium',
-    weight: 50,
-    sugar: 10
-  };
+  <script>
+    const apple = {
+      color: 'Red',
+      size: 'Medium',
+      weight: [50,60],
+      sugar: 10
+    };
+    
+    // Objects are not iterable. 
+    // So how can their contents be iterated on if needed?
+    
+    // Object.values() and Object.entries() will return the contents of an object as an array which can be iterated on.
+    
+    // Object.keys() can be used as well, but you would need to do extra work to access the values.
+    
+    // Object.values() will return an array that contains the values found at each property.
+    
+    // Object.entries will return an array that contains subarrays containing the key/value pairs.
 
-  for (const prop in apple) {
-    const value = apple[prop];
-    console.log(value, prop);
-  }
+    for (const prop of Object.values(apple)) {
+      console.log('values', prop)
+      // We are console logging individual items of the array of values!
+    }
+    for (const prop of Object.entries(apple)) {
+      console.log('entries', prop)
+      // We are console logging individual items of the array of entries!
+    }
 
-</script>
+  </script>
 </body>
+
 </html>
