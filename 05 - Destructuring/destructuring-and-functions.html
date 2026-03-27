@@ -15,6 +15,12 @@
     };
     return converted;
   }
+  
+  // Destructure the object that is returned by convertCurrency into variables
+  const{USD, AUD} = convertCurrency(100);
+  
+  // Note that with destructuring objects, if you want to assign the value of a property to a variable, the property name and variable name must match.
+  console.log(USD, AUD)
 
   function tipCalc({ total = 100, tip = 0.15, tax = 0.13 } = {}) {
     return total + (tip * total) + (tax * total);
