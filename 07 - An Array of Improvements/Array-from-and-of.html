@@ -11,25 +11,36 @@
     <p>Snickers</p>
   </div>
 <script>
-  // const people = document.querySelectorAll('.people p');
-  // const peopleArray = Array.from(people, person => {
-  //   console.log(person);
-  //   return person.textContent;
-  // });
-  // console.log(peopleArray);
-
-  // // const names = people.map(person => person.textContent);
-
+  const people = document.querySelectorAll(".people p");
+  
+  // The Array.from() STATIC method can be used to convert "array-like" objects into actual arrays.
+  
+  // Static methods vs Prototype methods:
+  // Static methods are methods that you call *on the class itself*. For Arrays, they help you create arrays out of non-arrays or check if something is an array (.isArray).
+  // Prototype methods are methods that you call on an instance of an existing array, like .map() or .filter(), etc.
+  
+  
+  // In this example, document.querySelectorAll returns a Node-list, which is similar to an array.
+  // Using Array.from() and passing the node list as a parameter will return the node list contents as an array.
+  // const names = Array.from(people).map(person => person.textContent)
+  
+  // Array.from() can accept the .map() function that I attached as a second argument because it's designed to accept a map function as its second argument.
+  // Rewrite:
+  // const names = Array.from(people, person => person.textContent)
+  // This is more efficient because calling .map() chained off of .from essentially causes another array to be generated behind the scenes which is extra work/ less optimal for heavier loads.
+  
+  
   function sumAll() {
-    const nums = Array.from(arguments);
-    return nums.reduce((prev, next) => prev + next, 0);
+    return Array.from(arguments).reduce((acc, num) => acc + num, 0);
   }
 
-  sumAll(2, 34, 23, 234, 234, 234234, 234234, 2342);
+console.log(sumAll(1,2,34,345,5,6))
 
-  const ages = Array.of(12,4,23,62,34);
-  console.log(ages);
 
+// Array.of() Static Method:
+// This just creates an array out of the arguments passed to it. 
+const ages = Array.of(1,2,3,4,5)
+console.log(ages);
 </script>
 </body>
 </html>
