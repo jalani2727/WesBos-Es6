@@ -1,24 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>The ...Spread Operator</title>
 </head>
+
 <body>
-<script>
+  <script>
 
-  const featured = ['Deep Dish', 'Pepperoni', 'Hawaiian'];
-  const specialty = ['Meatzza', 'Spicy Mama', 'Margherita'];
+    const featured = ['Deep Dish', 'Pepperoni', 'Hawaiian'];
+    const specialty = ['Meatzza', 'Spicy Mama', 'Margherita'];
 
-  const pizzas = [...featured, 'veg', ...specialty];
-  const fridayPizzas = [...pizzas];
+    // Spread operators can be used to apply the contents of an iterable to an array.
+    // Using the ... syntax + the name of the array, you can effectively create a new array out of an iterable or combine the contents of multiple iterables into a single array
 
-  const deepDish = {
-    pizzaName: 'Deep Dish',
-    size: 'Medium',
-    ingredients: ['Marinara', 'Italian Sausage', 'Dough', 'Cheese']
-  };
+    // For example:
+    const pizzas = [...featured, 'Veggie', ...specialty]
+    console.log(pizzas)
+    // This is also useful for creating a new copy of an existing array without having to create an empty array and using .concat() to add values to the empty array.
+    
+    // The spread operator can also be used on objects.
+    
+    // It should be noted that the spread operator will only create a "shallow" copy of the contents of the the iterable. This means that if an object or an array is nested, the reference to it will be captured by the spread operator. 
+    
+    
+    const deepDish = {
+      pizzaName: 'Deep Dish',
+      size: 'Medium',
+      ingredients: ['Marinara', 'Italian Sausage', 'Dough', 'Cheese']
+    };
+    // SO, if you tried to make a copy of this deepDish object and add another ingredient, it will also be updated in the original deepDish.
+    const copyDish = {...deepDish};
+    copyDish.ingredients.push('Parmesan Cheese');
+    console.log('copy', copyDish)
+    console.log('original', deepDish)
+    
+    // If you wanted to make a perform "deep" cloning instead of "shallow" cloning, there is a structuredClone() method that you could use to do this. The entire tree is duplicated into new memory rather than pointing to references of any nested objects.
+    
+    // Deep copy with structuredClone()
+    const trulyDeepDishLOL = structuredClone(deepDish);
+    trulyDeepDishLOL.ingredients.push('Deep Parm');
+    
+    console.log(trulyDeepDishLOL);
 
-</script>
+  </script>
 </body>
+
 </html>
