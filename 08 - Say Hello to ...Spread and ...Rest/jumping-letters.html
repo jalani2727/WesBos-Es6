@@ -30,7 +30,29 @@
   <h2 class="jump">SPREADS!</h2>
 
 <script>
+  // Use map, spread and querySelector() to make the CSS work properly:
   
+  // querySelector() to grab the h2 element
+  const jumpElement = document.querySelector('.jump');
+
+  // Spread to create an array of the letters
+
+  // jumpElement.innerHTML = [...jumpElement.textContent].map(letter => `<span>${letter}</span>`
+  // ).join('');
+  
+  // Rewrite as a functional programmer:
+  jumpElement.innerHTML = spanify(jumpElement.textContent)
+  function spanify(word) {
+    return [...word].map(letter => `<span>${letter}</span>`
+  ).join('');
+  }
+  
+  
+  // As a functional programmer, you should take note that this function is a pure function. It takes a string in and returns a string with no side effects. It is good practice to create these kinds of functions as constants with arrow notation, like so:
+  // const spanify = word => [...word].map(letter => `<span>${letter}</span>`).join('')
+  
+  // Traditional function declarations are hoisted so they may be referenced before they are declared without issue. However, if you are going to declare a function as a constant, IT IS NOT HOISTED, and would need to be defined BEFORE it is called in the program. The const version of this function would need to be moved in the case of this example.
+
 </script>
 </body>
 </html>
