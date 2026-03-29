@@ -1,4 +1,4 @@
-var weather = new Promise((resolve) => {
+const weather = new Promise((resolve) => {
   setTimeout(() => {
     resolve({ temp: 29, conditions: 'Sunny with Clouds' });
   }, 2000);
@@ -8,11 +8,12 @@ const tweets = new Promise((resolve, reject) => {
   setTimeout(() => {
     resolve(['I like cake', 'BBQ is good too!']);
   }, 500);
+  reject(new Error('There was an error with the tweets'));
 });
 
 Promise
   .all([weather, tweets])
-  .then(responses => {
+  .then((responses) => {
     const [weatherInfo, tweetInfo] = responses;
     console.log(weatherInfo, tweetInfo);
   });
@@ -22,9 +23,7 @@ const streetCarsPromise = fetch('http://data.ratp.fr/api/datasets/1.0/search/?q=
 
 Promise
   .all([marketPromise, streetCarsPromise])
-  .then(responses => {
-    return Promise.all(responses.map(res => res.json()));
-  })
-  .then(responses => {
+  .then((responses) => Promise.all(responses.map((response) => response.json())))
+  .then((responses) => {
     console.log(responses);
   });
