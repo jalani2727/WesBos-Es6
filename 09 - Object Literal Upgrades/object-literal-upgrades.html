@@ -1,59 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Object Literal Upgrades</title>
 </head>
+
 <body>
-<script>
-  const first = 'snickers';
-  const last = 'bos';
-  const age = 2;
-  const breed = 'King Charles Cav';
-  const dog = {
-    firstName: first,
-    last,
-    age,
-    breed,
-    pals: ['Hugo', 'Sunny']
-  };
-  console.log(dog);
+  <script>
+    const first = 'snickers';
+    const last = 'bos';
+    const age = 2;
+    const breed = 'King Charles Cav';
 
-  const modal = {
-    create(selector) {
+    // What is an object literal?
+    // It's a object that you have created in your code using the {} curly brace syntax. "Literal" in this context means you are writing the value directly in the source code in stead of constructing it programmatically via `new Object()` or a constructor function.
 
-    },
-    open(content) {
+    // If the property names are going to have the same names as the variables you want to add to the object, you can just add them to your object literal. If you want to use a different, name you would assign the variable to a property as a key of your choosing.
+    const dog = { firstName: first, last, age, breed }
+    console.log(dog)
 
-    },
-    close(goodbye) {
+    // What about if you have methods assigned to your object?
+    const modal = {
+      // Old Way: needs a colon and the function keyword
+      create: function () {
+
+      },
+      //New Way: gets rid of the colon and function keyword - Note: this syntax won't lose the context of the *this* of the function like arrow syntax does.
+      open() {
+
+      },
+      close() {
+
+      }
 
     }
-  }
-
-  function invertColor(color) {
-      return '#' + ("000000" + (0xFFFFFF ^ parseInt(color.substring(1),16)).toString(16)).slice(-6);
-  }
-
-  const key = 'pocketColor';
-  const value = '#ffc600';
-
-  const tShirt = {
-    [key]: value,
-    [`${key}Opposite`]: invertColor(value)
-  };
-
-  const keys = ['size', 'color', 'weight'];
-  const values = ['medium', 'red', 100];
-
-  const shirt = {
-    [keys.shift()]: values.shift(),
-    [keys.shift()]: values.shift(),
-    [keys.shift()]: values.shift(),
-  }
-  console.log(shirt);
 
 
-</script>
+    // Computed Property Names:
+
+    function invertColor(color) {
+      return '#' + ("000000" + (0xFFFFFF ^ parseInt(color.substring(1), 16)).toString(16)).slice(-6);
+    }
+    const key = 'pocketColor';
+    const value = '#ffc600';
+
+    const tShirt = {
+      [key]: value,
+      // You can use template literal syntax (``) to calulate a new name for the property
+      [`${key}Opposite`]: invertColor(value)
+    }
+
+    console.log(tShirt);
+
+    // Another example:
+    const keys = ['size', 'color', 'weight'];
+    const values = ['medium', 'red', 100];
+    // You can use .shift() on these arrays to remove the first element and return it. This will modify the original arrays though. This is a destructive operation though. Mutating source data isn't a good idea.
+
+    const shirt = {
+      [keys.shift()]: values.shift(),
+      [keys.shift()]: values.shift(),
+      [keys.shift()]: values.shift()
+    }
+    console.log(shirt);
+  </script>
 </body>
+
 </html>
