@@ -6,6 +6,9 @@
 </head>
 <body>
 <script>
+  // Symbols are unique identifiers that prevent "naming collisions"
+  // Any time you want to create some property in a unique way. This is another option of providing a unique identifier.
+  // These symbols that you create are invisble to normal code unless they are specifically looked for with something like Object.getOwnPropertySymbols().
   const wes = Symbol('Wes');
   const person = Symbol('Wes');
 
