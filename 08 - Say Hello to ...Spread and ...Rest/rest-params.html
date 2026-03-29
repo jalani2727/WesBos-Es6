@@ -6,21 +6,30 @@
 </head>
 <body>
 <script>
-  // function convertCurrency(rate, tax, tip, ...amounts) {
-  //   console.log(rate, tax, tip, amounts);
-  //   return amounts.map(amount => amount * rate);
-  // }
+// The ... Rest param is the opposite of the Spread Parameter.
+// It takes multiple things and pack them into an array.
 
-  // const amounts = convertCurrency(1.54, 10, 23, 52, 1, 56);
-  // console.log(amounts);
+// 
 
-  const runner = ['Wes Bos', 123, 5.5, 5, 3, 6, 35];
-  const [name, id, ...runs] = runner;
-  console.log(name, id, runs);
+function convertCurrency(rate, ...amounts) {
+  return amounts.map(amount => amount * rate)
+}
 
-  const team = ['Wes', 'Kait', 'Lux', 'Sheena', 'Kelly'];
-  const [captain, assistant, ...players] = team;
-  console.log(captain, assistant, players)
+// How is this different from the arguments keyword that you can use inside of a function? Well, you mig ht have an argument that doesn't match the same functionality as the other arguments in your function. In this convertCurrency function, the first value is intended to be used as the conversion rate but then there could be an indeterminate number of numbers to be converted. Using the ...Rest param during the function declaration will pass the "rest" of the arguments as an array to be used in the function.
+
+// Also, where "arguments" is array-ish, the rest parameter will create a true array out of the rest of the parameters passed in.
+
+// console.log(convertCurrency(1.54, 10,20,34,54,1))
+
+// The rest parameter is also useful when desctructuring an array into variables!
+
+const runner = ['Jalani Paul', 123, 5.5, 5, 4, 4, 23]
+// Destructuring syntax:
+const [name, id, ...miles] = runner;
+// The first value will be destructured into name, the second into id, and the "rest" of the values will be destructured into an array called miles.
+console.log(name, id, miles);
+
+// NOTE: I keep putting the rest and spread operators in brackets when trying to use them and getting errors. You would only do this is you needed to create a new array out of an existing one. THEY DON'T NEED TO BE IN BRACKETS TO BE USED.
 
 </script>
 </body>
