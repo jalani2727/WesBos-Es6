@@ -4,3 +4,5 @@ haters/
 *.log
 updates/
 dist/
+
+.env
