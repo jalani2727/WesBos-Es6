@@ -19,11 +19,11 @@ Promise
     console.log(weatherInfo, tweetInfo);
   });
 
-const postsPromise = fetch('http://wesbos.com/wp-json/wp/v2/posts');
+const marketPromise = fetch('http://api.marketstack.com/v1/eod?access_key=86e5e079f620de16f31e8039c62c72d0&symbols=AAPL');
 const streetCarsPromise = fetch('http://data.ratp.fr/api/datasets/1.0/search/?q=paris');
 
 Promise
-  .all([postsPromise, streetCarsPromise])
+  .all([marketPromise, streetCarsPromise])
   .then(responses => Promise.all(responses.map(res => res.json())))
   .then(responses => {
     console.log(responses);
