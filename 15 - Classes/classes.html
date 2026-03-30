@@ -1,27 +1,112 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Inheritance Review</title>
 </head>
+
 <body>
-<script>
-  function Dog(name, breed) {
-    this.name = name;
-    this.breed = breed;
-  }
+  <script>
+    // Pre-ES6
+    // function Dog(name, breed) { // Capital name since this is going to be a class. This signifies that you should use the "new" keyword when calling this.
+    //   this.name = name;
+    //   this.breed = breed;
+    // }
 
-  Dog.prototype.bark = function() {
-    console.log(`Bark Bark! My name is ${this.name}`);
-  };
+    // // As you should know you can add properties to your classes after you have defined them. 
+    // Dog.prototype.bark = function () {
+    //   console.log(`Bark, my name is ${this.name}`);
+    // }
 
-  Dog.prototype.cuddle = function() {
-    console.log(`I love you owner!`);
-  };
+    // const snickers = new Dog('Snickers', 'King Charles')
+    // snickers.bark();
+    // // Adding new functions to a class that you construct after constructing it will be available to all instances of the class you create. 
+    // Dog.prototype.woof = function () {
+    //   console.log(`Woof!`);
+    // }
+    // snickers.woof()
+    // // Even if you overwrite a function on the class prototype, all instance of the class you've created will now have that new version.
+    // Dog.prototype.bark = function () {
+    //   console.log(`Bark, my name is ${this.name} and I just need to let you know that I am a ${this.breed}.`);
+    // }
+    // snickers.bark();
 
-  const snickers = new Dog('Snickers', 'King Charles');
-  const sunny = new Dog('Sunny', 'Golden Doodle');
 
-</script>
+
+    // With ES6, there is a new way to create classes with a "class" expression:
+    class Dog {
+      constructor(name, breed) {
+        this.name = name;
+        this.breed = breed;
+      } // no comma for class construction!
+      bark() {
+        console.log(`Bark, my name is ${this.name}`);
+      }
+      woof() {
+        console.log(`Woof!`);
+      }
+
+      // Remember your Static Methods vs Prototype methods notes in 07 - An Array of Improvements\Array-from-and-of.html
+      // bark() and woof() are prototype methods that can be called on the instances of Dog that you can create. 
+      // You know how the Array class has .from() and .of()? Those are static methods that aren't avaialble on an instance of an array. They are called on the class itself.
+
+      // To define a static method on your created classes, use the `static` keyword:
+      static info() {
+        console.log('This is a class that is used to create an instance of a Dog')
+      }
+
+      // Getters and Setters
+      // When you're creating a class, this is how you can create it's 'properties'. Instead of making a method to get some information about the class you can create a getter function inside the class definition
+
+      get description() { // This can be called as "snickers.description" later on to return whatever you want the desciprtion getter to return.
+        return `${this.name} is a ${this.breed} type of dog.`
+      }
+
+      // Setters will allow you to set a new property
+      set nicknames(value) {
+        this._nicknames = value.trim()
+      }
+      // If you want this property to be accessible, create a getter for it:
+      get nicknames() {
+        return this._nicknames;
+      }
+
+      // Setters are also used when you want to update a property value, like name for example:
+      set name(value) {
+        // Validation is a good idea!
+        if (typeof value !== 'string') {
+          throw new Error('Name must be a string')
+        }
+        this._name = value // You would use "_name" here as a internal reference for the class. If you were to use "name" you would be pointing to this setter function you've created, causing a recursive loop.
+        // When you want to get the name, you should return what this setter function is storing.
+      }
+
+      get name() {
+        return this._name
+      }
+    }
+
+    // You could also choose to build the class as a constant - This is mainly useful when classes are being created dynamically or passed around as values - a fucntional programming pattern called higher-order classes, similar to higher-order functions:
+    const Cat = class {
+      constructor(name, breed) {
+        this.name = name;
+        this.breed = breed;
+      } // no comma for class construction!
+      meow() {
+        console.log(`Meow, my name is ${this.name}`);
+      }
+      purr() {
+        console.log(`purrrrrrrrrrrrrr`);
+      }
+    }
+    
+    const son = new Cat('Son', 'American Shorthair');
+    const snickers = new Dog('Snickers', 'King Charles')
+    console.log(son)
+    console.log(snickers)
+
+  </script>
 </body>
+
 </html>
