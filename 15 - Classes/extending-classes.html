@@ -7,33 +7,42 @@
 <body>
 <script>
   class Animal {
-    constructor(name) {
+    constructor(name, age) {
       this.name = name;
+      this.age = age;
       this.thirst = 100;
-      this.belly = [];
+      this.belly =[];
     }
     drink() {
-      this.thirst -= 10;
+      this.thirst-= 10;
       return this.thirst;
     }
-    eat(food) {
+    eat(food){
       this.belly.push(food);
       return this.belly;
     }
   }
 
   class Dog extends Animal {
-    constructor(name, breed) {
-      super(name);
+    // Constructor is optional in a class that extends another - The constructor of the the extended class will be used.
+    // If you do choose to provide a constructor, you would added the paramters from the extended class as well as new parameters for your new class
+    constructor(name, age, breed){
+      // Classes with constructors that extend another class need the extended properties to be passed to a super() function.
+      super(name, age); // The extended classes needs to be set up before more things can be layered on top of the class. super() handles that.
       this.breed = breed;
     }
     bark() {
-      console.log('Bark bark I\'m a dog');
+      console.log('bark, yo')
     }
   }
+const rhino = new Animal('Owain', 4);
+const seamus = new Dog('Seamus', 6, "Golden Retreiver");
 
-  const rhino = new Animal('Rhiney');
-  const snickers = new Dog('Snickers', 'King Charles');
+seamus.bark();
+seamus.eat('bone');
+console.log(seamus.belly);   // ['bone']
+console.log(seamus.breed);   // 'Golden Retriever'
+rhino.drink();
 
 </script>
 </body>
