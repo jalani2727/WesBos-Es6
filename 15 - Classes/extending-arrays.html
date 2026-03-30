@@ -6,27 +6,29 @@
 </head>
 <body>
 <script>
-  class MovieCollection extends Array {
-    constructor(name, ...items) {
-      super(...items);
-      this.name = name;
-    }
-    add(movie) {
-      this.push(movie);
-    }
-    topRated(limit = 10) {
-      return this.sort((a, b) => (a.stars > b.stars ? -1 : 1)).slice(0, limit);
-    }
+class MovieCollection extends Array {
+  
+  // When you need custom properties on your extension class, you must provide a constructor. Whenever a constructor is called, super() must follow in order to intialize the extended class. 
+  constructor(name, ...items) {
+    super(...items);
+    this.name = name;
   }
+  add(movie) {
+    this.push(movie);
+  }
+  topRated(limit = 10) {
+    return this.sort((a,b) => (a.stars > b.stars ? -1: 1)).slice(0, limit);
+  }
+}
 
-  const movies = new MovieCollection('Wes\'s Fav Movies',
+  const movies = new MovieCollection(
+    'Wes\'s Fav Movies',
     { name: 'Bee Movie', stars: 10 },
     { name: 'Star Wars Trek', stars: 1 },
     { name: 'Virgin Suicides', stars: 7 },
     { name: 'King of the Road', stars: 8 }
   );
 
-  movies.add({ name: 'Titanic', stars: 5 });
 
 </script>
 </body>
