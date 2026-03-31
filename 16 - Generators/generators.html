@@ -1,42 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Generators</title>
 </head>
+
 <body>
-<script>
-  function* listPeople() {
-    let i = 0;
-    yield i;
-    i++;
-    yield i;
-    i++;
-    yield i;
-  }
+  <script>
+    // What are generator functions?
+    // These are functions that can be stopped and started. They can be paused for an indefinite amount of time and information can be passed in later on.
 
-  const people = listPeople();
+    // Generator functions are marked with an * on the function keyword.
 
-  const inventors = [
-    { first: 'Albert', last: 'Einstein', year: 1879 },
-    { first: 'Isaac', last: 'Newton', year: 1643 },
-    { first: 'Galileo', last: 'Galilei', year: 1564 },
-    { first: 'Marie', last: 'Curie', year: 1867 },
-    { first: 'Johannes', last: 'Kepler', year: 1571 },
-    { first: 'Nicolaus', last: 'Copernicus', year: 1473 },
-    { first: 'Max', last: 'Planck', year: 1858 },
-  ];
-
-  function* loop(arr) {
-    console.log(inventors);
-    for (const item of arr) {
-      yield item;
+    function* listPeople() {
+      yield 'Jalani'; // Rather than returning a value, values are yielded from the function.
+      yield 'Anastasia';
+      yield 'Josef';
     }
-  }
+    // Invoke the generator by assigning it to a variable:
+    const people = listPeople();
 
-  const inventorGen = loop(inventors);
+    // If you look at people in your console, you will see that has a "Generator State" of "suspended". The state will update when one of the available generator methods is called on the your generator function variable.
+    // generator.next(), generator.return, and generator.throw are the available prototype methods.
+
+    // Calling .next() on the variable will return an object that contains the first yielded value and a `done` attribute. Calling .next() will return the value `done: false` until it is called a final time to return and undefined value and `done: true`
+
+    function* increaseNumberTwice(num) {
+      yield num;
+      num++;
+      yield num;
+      num++;
+      yield num;
+    }
+    const bubbleUp = increaseNumberTwice(11);
+
+    // The value of variables defined inside of the function will be preserved through .next() calls until the generator function is finished.
+
+    function* increaseNumberThrice() {
+      let i = 0;
+      yield i;
+      i++;
+      yield i;
+      i++;
+      yield i;
+    }
+
+    const bubbleUp2 = increaseNumberThrice();
+
+    // Attempting to invoke the generator through the same variable again will not work. The `Generator State` of a completed generator will be "closed"
 
 
-</script>
+    const inventors = [
+      { first: 'Albert', last: 'Einstein', year: 1879 },
+      { first: 'Isaac', last: 'Newton', year: 1643 },
+      { first: 'Galileo', last: 'Galilei', year: 1564 },
+      { first: 'Marie', last: 'Curie', year: 1867 },
+      { first: 'Johannes', last: 'Kepler', year: 1571 },
+      { first: 'Nicolaus', last: 'Copernicus', year: 1473 },
+      { first: 'Max', last: 'Planck', year: 1858 },
+    ];
+    
+    function* generateInventor(arr) {
+      for (const inventor of arr) {
+        yield inventor;
+      }
+    }
+    
+    const inventorGenerator = generateInventor(inventors)
+
+  </script>
 </body>
+
 </html>
