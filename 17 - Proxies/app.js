@@ -39,5 +39,29 @@ const phoneHandler = {
 const phoneNumbers = new Proxy({}, phoneHandler)
 
 phoneNumbers.home = "+234-444-3545";
-phoneNumbers.cell = "(404)-539-1776"
+phoneNumbers.cell = "(404)-539-1776";
+
+
+
+// Proxies can be useful when creating a library for other devs to use themselves. Basically as a way to make it so that devs can consistently set properties on objects the correct way. 
+// For example, you can warn a user that they are setting a property that already exists but is spelled differently or has different casing to avoid setting a redundant new property.
+
+const safeHandler = {
+    set(target, property, value) {
+        // In this example, we are seeing if what has been entered as a property is similar to the property as it is represented in the Proxy's target. We can do this by just seeing if they are the same if both are lowercase. 
+        const similarKey = Object.keys(target).find(key => key.toLowerCase() === property.toLowerCase());
+
+        // Then we would check to see if this property is not found in the proxy target and if it's similar to what's in the proxy target. If it it fails to meet these conditions, throw an error. Otherwise, the new property will just be set without falling into this trap
+        if (!(property in target) && similarKey) {
+            throw new Error(`Oops! there is already a(n) ${property} property but with the case of ${similarKey}.`)
+        }
+        target[property] = value
+    }
+}
+
+const safety = new Proxy({ id: 100 }, safeHandler) // here we are intending to receive the `id` property exactly as it appears, "id"
+
+// Say someone tries to set an "ID" instead of "id" like the proxy expects.
+// The handler you've created in this file is useful for catching typos or inconsistnet casing, which can be a common source of bugs in JS objects. 
+safety.ID = 200;
 
