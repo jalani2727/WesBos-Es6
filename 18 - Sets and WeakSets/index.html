@@ -9,7 +9,23 @@
 
 <body>
     <h1>Sets and WeakSets</h1>
-    <script src="./app.js" type="module"></script>
+    <!-- <script src="./app.js" type="module"></script> -->
+    <script>
+        // Weak Sets - A Weak Set can only every contain Objects. No strings, arrays, numbers, etc.
+
+        let dog1 = { name: 'Snickers', age: 3 };
+        let dog2 = { name: 'sunny', age: 1 };
+        
+        const weakSauce = new WeakSet([dog1, dog2])
+        
+        // They can't be iterated upon. For-of loops will return an error if used on Weak Sets.
+        
+        // Weak Sets don't have a .clear() method. If one of the objects inside of your weak set is deleted, it's also deleted from the set.
+        console.log(weakSauce);
+        dog1 = null;
+        console.log(weakSauce);
+
+    </script>
 </body>
 
 </html>
