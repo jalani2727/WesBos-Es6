@@ -46,7 +46,7 @@ students.add('Justin');
 
 
 
-// Weak Sets - A Weak Set can only every contain Objects. No strings, arrays, numbers, etc.
+// Weak Sets - A Weak Set can only ever contain Objects. No strings, arrays, numbers, etc.
 
 let dog1 = { name: 'Snickers', age: 3 };
 let dog2 = { name: 'sunny', age: 1 };

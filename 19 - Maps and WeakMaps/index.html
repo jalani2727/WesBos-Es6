@@ -12,7 +12,19 @@
     <!-- <script src="./app.js" type="module"></script> -->
     <script>
 
+        // Weak Maps are not iterable and they will get garbage collected if an object inside of it is deleted.
 
+        let dog1 = { name: 'Seaums' };
+        let dog2 = { name: 'Johnny' };
+
+        const strong = new Map();
+        const weak = new WeakMap();
+
+        strong.set(dog1, 'Seamus Rules');
+        weak.set(dog2, 'Johnny Drools');
+        
+        dog1 = null; // Regular "strong" map holds on to the reference even though it's been deleted. Results in a memory leak
+        dog2 = null; // Weak map will garbage collect the object. You would reach for a weak map if you don't want to babysit the values in a map in case they get deleted somehow.
     </script>
 </body>
 
