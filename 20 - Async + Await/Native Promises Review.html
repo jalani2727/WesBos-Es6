@@ -9,24 +9,18 @@
 
 <body>
   <script>
-    // fetch('api.github.com/users/wesbos').then(res => {
-    //   return res.json();
-    // }).then(res => {
-    //   console.log(res);
-    // }).catch(err => {
-    //   console.error('OH NOO!!!!!!!');
-    //   console.error(err);
-    // })
-
+    // fetch('https://api.github.com/users/jalani2727')
+    //   .then(res => res.json())
+    //   .then(data => {console.log(data)})
+    //   .catch(err => {console.error(err)})
+    
     const video = document.querySelector('.handsome');
-
-    navigator.mediaDevices.getUserMedia({ video: true }).then(mediaStream => {
+    
+    navigator.mediaDevices.getUserMedia({video: true}).then(mediaStream =>{
       video.srcObject = mediaStream;
       video.load();
       video.play();
-    }).catch(err => {
-      console.log(err);
-    })
+    }).catch(err => {console.error(err)})
   </script>
 </body>
 

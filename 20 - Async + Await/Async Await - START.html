@@ -7,7 +7,75 @@
 
 <body>
   <script>
+    // To use async/await, you are creating an asynchronous function with the async keyword:
 
+    // The AWAIT keyword can then be used inside of your async function. The await keyword cannot be used outside of an async
+
+    function breathe(amount) {
+      return new Promise((resolve, reject) => {
+        if (amount < 500) {
+          reject('That is too small of a value');
+        }
+        setTimeout(() => resolve(`Done for ${amount} ms`), amount);
+      });
+    }
+
+    // async function go() { // Arrow version: const go = async() =>{}
+    //   await breathe(2000); // await is the same as .then() but just easier to read. Also returns a promise that you can chain another await off of.
+    //   await breathe(2000);
+    //   await breathe(1000);
+    //   await breathe(1000);
+    //   await breathe(200);
+    // }
+
+
+    // Error handling in Async/Await Functions is done by:
+    // 1. using a Try/Catch block
+    // 2. Wrapping your async function in a higher-order function that will handle potential errors
+    // // Option 1: Try/Catch
+    // async function go() {
+    //   try { // all of your awaits just go in here.
+    //     //   // In order to capture the data that comes back from your function, you have to capture it in a variable like so:
+    //     const res = await breathe(2000);
+    //     console.log(res)
+    //     const res2 = await breathe(1000);
+    //     console.log(res2)
+    //     const res3 = await breathe(1000);
+    //     console.log(res3)
+    //     const res4 = await breathe(200);
+    //     console.log(res4)
+    //   }
+    //   catch(err) {
+    //     console.error('shiddddd')
+    //     console.error(err)
+    //   }
+    // }
+
+    // Option 2: Higher-order function
+    // Using a higher-order function, you can avoid writing a bunch of try/catch blocks in your code.
+    // Create your handler function:
+    function catchErrors(fn) {
+      return function () { // if the function you're wrapping (in this case it's go()) had arguments you would use the rest operator here...
+        return fn().catch(err => { //... and the spread operator here to represent the item(s) passed to go.
+          console.error(err);
+        })
+
+      }
+    }
+
+    async function go() {
+      const res = await breathe(2000);
+      console.log(res)
+      const res2 = await breathe(1000);
+      console.log(res2)
+      const res3 = await breathe(1000);
+      console.log(res3)
+      const res4 = await breathe(200);
+      console.log(res4)
+    }
+
+    const wrappedFunction = catchErrors(go); // WrappedFunction becomes a function becuase catchErrors returns a function that calls go().
+    wrappedFunction();
   </script>
 </body>
 
